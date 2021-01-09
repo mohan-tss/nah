@@ -32,7 +32,7 @@
     "@nestjs/websockets": "^7.3.2",
     "aws-sdk": "^2.726.0",
     "bull": "^3.16.0",
-    "class-transformer": "^0.2.3",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.11.0",
     "fcm-node": "^1.5.2",
     "moment": "^2.29.1",
