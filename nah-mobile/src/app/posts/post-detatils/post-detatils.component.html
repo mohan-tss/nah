@@ -77,7 +77,7 @@
       <ion-list class="meeting-list meeting-list-d" *ngFor="let c of post.comments; let cInx = index">
         <ion-grid class="meeting-item ion-no-padding">
           <ion-row class="ion-nowrap ion-align-items-center">
-            <ion-col size="auto" class="img-left ion-no-padding" (click)="navProfile(userInfo)">
+            <ion-col size="auto" class="img-left ion-no-padding" (click)="navProfile(c.createdBy)">
               <ion-avatar class="avater">
                 <img [src]="c.createdBy.imageUrl" />
               </ion-avatar>
