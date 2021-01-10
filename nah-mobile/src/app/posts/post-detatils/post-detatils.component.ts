@@ -245,7 +245,12 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
             if (images.length === 0) {
               images = null;
             }
-            this.socialSharing.shareViaFacebook(post.title, images).then((res) => {
+            let postText = post.title;
+            const postUrl = 'http://sayno.mobi/';
+            if (post.description) {
+              postText = post.description;
+            }
+            this.socialSharing.shareViaFacebook(postText, images, postUrl).then((res) => {
               console.log('facebook share success -->');
 
             }).catch((e) => {
@@ -260,7 +265,12 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
             if (images.length === 0) {
               images = null;
             }
-            this.socialSharing.shareViaTwitter(post.title, images).then((res) => {
+            let postText = post.title;
+            const postUrl = 'http://sayno.mobi/';
+            if (post.description) {
+              postText = post.description;
+            }
+            this.socialSharing.shareViaTwitter(postText, images, postUrl).then((res) => {
               console.log('twitter share success -->');
             }).catch((e) => {
               console.log('twitter share failure -->', e);
@@ -274,8 +284,12 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
             if (images.length === 0) {
               images = null;
             }
-            console.log('images -->', images);
-            this.socialSharing.shareViaWhatsApp(post.title, images).then((res) => {
+            let postText = post.title;
+            const postUrl = 'http://sayno.mobi/';
+            if (post.description) {
+              postText = post.description;
+            }            
+            this.socialSharing.shareViaWhatsApp(postText, images, postUrl).then((res) => {
               console.log('Whatsapp share success -->');
             }).catch((e) => {
               console.log('Whatsapp share failure -->', e);
@@ -290,7 +304,11 @@ export class PostDetatilsComponent implements OnInit, OnDestroy, AfterViewInit {
             if (images.length === 0) {
               images = null;
             }
-            this.socialSharing.shareViaInstagram(post.title, images).then((res) => {
+            let postText = post.title;
+            if (post.description) {
+              postText = post.description;
+            }            
+            this.socialSharing.shareViaInstagram(postText, images).then((res) => {
               console.log('Instagram share success -->');
             }).catch((e) => {
               console.log('Instagram share failure -->', e);

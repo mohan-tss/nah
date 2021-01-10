@@ -55,7 +55,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.userInfo = this.authS.getUserInfo();
     console.log('this.userInfo', this.userInfo);
     this.list$ = this.postBehavior.asObservable().pipe(
-      scan((acc, curr:any) => {
+      scan((acc, curr: any) => {
         if (curr.opt && curr.opt.type === 'delete') {
           let index = acc.findIndex((elt) => elt.id === curr.opt.id);
           acc.splice(index, 1);
@@ -247,66 +247,84 @@ export class PostListComponent implements OnInit, OnDestroy {
       cssClass: 'my-custom-class share-icons',
       buttons: [
         {
-        text: 'Facebook',  
-        role: 'destructive',
-        icon: 'logo-facebook',
-        handler: () => {
-          let images = post.photos.map(image => {return image.fullPath});
-          if(images.length === 0) {
-            images = null;
-          }
-          this.socialSharing.shareViaFacebook(post.title, images ).then((res) => {
-           console.log('facebook share success -->');
+          text: 'Facebook',
+          role: 'destructive',
+          icon: 'logo-facebook',
+          handler: () => {
+            let images = post.photos.map(image => { return image.fullPath });
+            if (images.length === 0) {
+              images = null;
+            }
+            let postText = post.title;
+            const postUrl = 'http://sayno.mobi/';
+            if (post.description) {
+              postText = post.description;
+            }
+            this.socialSharing.shareViaFacebook(postText, images, postUrl).then((res) => {
+              console.log('facebook share success -->');
 
-          }).catch((e) => {
-            console.log('facebook share failure -->', e);
-          });
-        }
-      }, {
-        text: 'Twitter',
-        icon: 'logo-twitter',
-        handler: () => {
-          let images = post.photos.map(image => {return image.fullPath});
-          if(images.length === 0) {
-            images = null;
+            }).catch((e) => {
+              console.log('facebook share failure -->', e);
+            });
           }
-          this.socialSharing.shareViaTwitter(post.title, images).then((res) => {
-            console.log('twitter share success -->');
-          }).catch((e) => {
-            console.log('twitter share failure -->', e);
-          });
-        }
-      }, {
-        text: 'Whatsapp',
-        icon: 'logo-whatsapp',
-        handler: () => {
-          let images = post.photos.map(image => {return image.fullPath});
-          if(images.length === 0) {
-            images = null;
+        }, {
+          text: 'Twitter',
+          icon: 'logo-twitter',
+          handler: () => {
+            let images = post.photos.map(image => { return image.fullPath });
+            if (images.length === 0) {
+              images = null;
+            }
+            let postText = post.title;
+            const postUrl = 'http://sayno.mobi/';
+            if (post.description) {
+              postText = post.description;
+            }
+            this.socialSharing.shareViaTwitter(postText, images, postUrl).then((res) => {
+              console.log('twitter share success -->');
+            }).catch((e) => {
+              console.log('twitter share failure -->', e);
+            });
           }
-          console.log('images -->', images);
-          this.socialSharing.shareViaWhatsApp(post.title, images).then((res) => {
-            console.log('Whatsapp share success -->');
-          }).catch((e) => {
-            console.log('Whatsapp share failure -->', e);
-          });
-        }
-      },
-      {
-        text: 'Instagram',
-        icon: 'logo-instagram',
-        handler: () => {
-          let images = post.photos.map(image => {return image.fullPath});
-          if(images.length === 0) {
-            images = null;
+        }, {
+          text: 'Whatsapp',
+          icon: 'logo-whatsapp',
+          handler: () => {
+            let images = post.photos.map(image => { return image.fullPath });
+            if (images.length === 0) {
+              images = null;
+            }
+            let postText = post.title;
+            const postUrl = 'http://sayno.mobi/';
+            if (post.description) {
+              postText = post.description;
+            }            
+            this.socialSharing.shareViaWhatsApp(postText, images, postUrl).then((res) => {
+              console.log('Whatsapp share success -->');
+            }).catch((e) => {
+              console.log('Whatsapp share failure -->', e);
+            });
           }
-          this.socialSharing.shareViaInstagram(post.title, images).then((res) => {
-            console.log('Instagram share success -->');
-          }).catch((e) => {
-            console.log('Instagram share failure -->', e);
-          });
-        }
-      }]
+        },
+        {
+          text: 'Instagram',
+          icon: 'logo-instagram',
+          handler: () => {
+            let images = post.photos.map(image => { return image.fullPath });
+            if (images.length === 0) {
+              images = null;
+            }
+            let postText = post.title;
+            if (post.description) {
+              postText = post.description;
+            }            
+            this.socialSharing.shareViaInstagram(postText, images).then((res) => {
+              console.log('Instagram share success -->');
+            }).catch((e) => {
+              console.log('Instagram share failure -->', e);
+            });
+          }
+        }]
     });
     await actionSheet.present();
   }
